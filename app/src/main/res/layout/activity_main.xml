@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/border"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/sleepdepth"
+        style="@style/home"
+        android:background="@drawable/roundedbuttonhome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="sleepDepth"
+        android:layout_weight="1"
+        android:text="Sleep Depth"
+        />
+
+    <Button
+        android:id="@+id/emailGenerate"
+        android:background="@drawable/roundedbuttonhome"
+        style="@style/home"
+        android:onClick="emailAssign"
+        android:layout_weight="1"
+        android:text="Email Generate"
+        />
+
+    <Button
+        android:id="@+id/voteDrink"
+        style="@style/home"
+        android:background="@drawable/roundedbuttonhome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="drinksVote"
+        android:layout_weight="1"
+        android:text="Vote Drinks"
+        />
+
+</LinearLayout>

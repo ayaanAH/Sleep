@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/border"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        style="@style/sleep"
+        android:layout_marginBottom="0dp"
+        android:textColor="#000"
+        android:text="WeekDays"
+        />
+    <EditText
+        android:id="@+id/weekdays"
+        style="@style/sleep"
+        android:inputType="number"
+        android:maxLength="10"
+        android:hint="hours slept"
+        android:layout_marginTop="0dp"
+        />
+    <TextView
+        android:text="WeekEnds"
+        android:layout_marginBottom="0dp"
+        android:textColor="#000"
+        style="@style/sleep"/>
+    <EditText
+        android:id="@+id/weekends"
+        android:inputType="number"
+        style="@style/sleep"
+        android:maxLength="10"
+        android:hint="hours slept"
+        android:layout_marginTop="0dp"
+        />
+    <Button
+        android:id="@+id/check"
+        style="@style/sleep"
+        android:onClick="checkResults"
+        android:text="Check"
+        android:background="@drawable/roundedbutton"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/sleepdepth"
+        style="@style/sleep"
+        android:textStyle="bold"
+        android:text=""
+        />
+
+</LinearLayout>
