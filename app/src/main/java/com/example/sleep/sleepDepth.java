@@ -2,6 +2,8 @@ package com.example.sleep;
 
 import android.annotation.TargetApi;
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -21,6 +23,7 @@ public class sleepDepth extends AppCompatActivity
 
     EditText weekDaysSleep, weekEndsSleep;
     TextView sleepDepth;
+    private static final String CHANNEL_ID = "1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +32,27 @@ public class sleepDepth extends AppCompatActivity
         weekDaysSleep=findViewById(R.id.weekdays);
         weekEndsSleep=findViewById(R.id.weekends);
         sleepDepth=findViewById(R.id.sleepdepth);
-
+        createNotificationChannel();
 
     }
+
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
 
     protected int checkDepth()
     {
@@ -66,7 +87,7 @@ public class sleepDepth extends AppCompatActivity
         else if (result<-5)
             msg = "GET UP! You are getting lazier everyday.You have slept "+result+" hours more than recommended";
         else
-            msg="You have enough sleep";
+            msg="You have had enough sleep";
         sleepDepth.setText(msg);
         sleepDepth.setTextColor(Color.RED);
         sleepDepth.setBackgroundResource(R.drawable.border);
@@ -77,18 +98,13 @@ public class sleepDepth extends AppCompatActivity
     {
 
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-        builder.setSmallIcon(R.drawable.sleepy);
+        Bitmap profilePicture = BitmapFactory.decodeResource(this.getResources(), R.drawable.sleepy);
 
-        Bitmap profilePicture = BitmapFactory.decodeResource(
-                this.getResources(),
-                R.drawable.sleepyhead
-        );
+        Bitmap bigPicture = BitmapFactory.decodeResource(this.getResources(), R.drawable.sleepyhead);
 
-        Bitmap bigPicture = BitmapFactory.decodeResource(
-                this.getResources(),
-                R.drawable.sleepyhead
-        );
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID);
+        builder.setSmallIcon(R.drawable.sleepy)
+        .setLargeIcon(profilePicture);
 
         NotificationCompat.BigPictureStyle style = new NotificationCompat.BigPictureStyle();
         style.bigPicture(bigPicture);
@@ -98,7 +114,7 @@ public class sleepDepth extends AppCompatActivity
         builder.setStyle(style);
 
         Notification notification = builder.build();
-        NotificationManagerCompat.from(this).notify(0 + 4, notification);
+        NotificationManagerCompat.from(this).notify(4, notification);
 
 
     }
